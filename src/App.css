@@ -1,0 +1,21 @@
+* {
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-family: "Mulish", sans-serif;
+}
+
+.custom_input {
+  border-radius: 0;
+  background-color: transparent;
+  border-color: rgb(50, 50, 50) !important;
+
+  .ant-input {
+    background-color: transparent;
+    color: white !important;
+  }
+}
+
+.customButton {
+  border-radius: 0 !important;
+}

@@ -1,0 +1,30 @@
+@import "./variables";
+
+.br_0 {
+  border-radius: 0;
+}
+
+.br_1 {
+  border-radius: 0.25rem;
+}
+
+.br_2 {
+  border-radius: 0.5rem;
+}
+
+.br_3 {
+  border-radius: 0.75rem;
+}
+
+.br_4 {
+  border-radius: 1rem;
+}
+
+// BORDERS
+.b_1_grey {
+  border: 1px solid $grey;
+}
+
+.b_r_1_grey {
+  border-right: 1px solid $grey;
+}
