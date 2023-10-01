@@ -32,10 +32,18 @@
   padding-bottom: 0.5rem;
 }
 
+.py_4 {
+  padding: 0.5rem 0 !important;
+}
+
 // PADDING X
 .px_0 {
   padding-left: 0;
   padding-right: 0;
+}
+
+.px_2 {
+  padding: 0 0.5rem;
 }
 
 .px_4 {
@@ -88,4 +96,16 @@
 // PY PX
 .py1_px_2 {
   padding: 0.25rem 0.5rem;
+}
+
+.pr_4 {
+  padding-right: 1rem;
+}
+
+.pb_4 {
+  padding-bottom: 1rem;
+}
+
+.pb_2 {
+  padding-bottom: 0.5rem;
 }

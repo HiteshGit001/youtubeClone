@@ -33,6 +33,7 @@ interface ICustomInput {
   placeholder?: string;
   onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
   onBlur?: FocusEventHandler<HTMLInputElement>;
+  onClick?: () => void;
   icon?: ReactElement | string
 }
 
@@ -54,6 +55,7 @@ const CustomInput: FC<ICustomInput> = (props) => {
     placeholder = "",
     onChange = () => null,
     onBlur = () => null,
+    onClick = () => null,
     icon = ""
   } = props;
 
@@ -101,7 +103,7 @@ const CustomInput: FC<ICustomInput> = (props) => {
           placeholder={placeholder}
           onBlur={onBlur}
         />
-        {icon && <CustomButton className="bg_gray" icon={iconUi} />}
+        {icon && <CustomButton onClick={onClick} className="bg_gray" icon={iconUi} />}
       </div>
       <ErrorContainer
         touched={touched}

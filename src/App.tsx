@@ -6,9 +6,12 @@ import { routes } from './routes/routes';
 import AuthLayout from './layout/AuthLayout';
 import Navbar from './components/Navbar/Navbar';
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+
 function App() {
   return (
-    <div className='bg_primary h_100vh'>
+    <div className='bg_primary'>
       <Navbar />
       <Suspense fallback="...Loading">
         <Routes>

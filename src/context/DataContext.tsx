@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Grid } from "antd";
 import { createContext, useContext, ReactNode, useReducer } from "react";
@@ -32,7 +33,7 @@ const DataContext = createContext({
   lg: false,
   dataDispatcher: (_data: any) => { },
   navigateToSpecificRoute: (_path: string) => { },
-  navigateRouteWithState: (_path: string) => { },
+  navigateRouteWithState: (_path: string, _state: any) => { },
 })
 
 export const useData = () => useContext(DataContext);

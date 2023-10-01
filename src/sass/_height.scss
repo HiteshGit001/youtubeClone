@@ -2,8 +2,12 @@
   height: 100vh;
 }
 
-.min_h_100vh{
+.min_h_100vh {
   min-height: 100vh;
+}
+
+.h_100 {
+  height: 100%;
 }
 
 .max_h_2 {
@@ -12,6 +16,10 @@
 
 .max_h_4 {
   max-height: 4rem;
+}
+
+.h_40_p {
+  height: 40%;
 }
 
 .h_40 {

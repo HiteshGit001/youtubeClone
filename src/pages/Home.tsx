@@ -1,16 +1,58 @@
 import React, { useEffect } from 'react'
-import { axiosGet } from '../utils/https.server'
+// import { axiosGet } from '../utils/https.server'
+import VideoCard from '../components/VideoCard/VideoCard'
+
+import { fetchVideos } from "../store/slice/videoDetailsSlice"
+import { useDispatch } from 'react-redux'
+import useAppSelector from '../hooks/useAppSelector';
+import { Col, Row } from 'antd';
+import Filter from '../components/Filter/Filter';
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  const { videoList, nextVideosToke } = useAppSelector((state) => state.videoDetails)
   useEffect(() => {
-    const response = axiosGet(
-      "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&key=AIzaSyBimZcCKNa9aEm54sIXczG-dXob5E2LHCc"
-      , true
-    )
-    console.log(response);
-  }, [])
+    if (!videoList?.length) {
+      fetchVideos(dispatch, []);
+    }
+  }, []);
+
+  const handleInfiniteScroll = async () => {
+    try {
+      if (window.innerHeight +
+        document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
+        fetchVideos(dispatch, videoList, nextVideosToke);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleInfiniteScroll);
+    return () => window.removeEventListener("scroll", handleInfiniteScroll);
+  }, [nextVideosToke])
+
+
   return (
-    <div>Home</div>
+    <div className="p_6">
+      <Filter />
+      <Row gutter={22}>
+        {
+          videoList?.map((ele) => {
+            return (
+              <Col sm={12} md={8}>
+                <VideoCard
+                  isVertical
+                  videoDetails={ele}
+                />
+              </Col>
+            )
+          })
+        }
+      </Row>
+    </div>
   )
 }
 

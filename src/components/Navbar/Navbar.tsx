@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
 import CustomInput from '../custom/CustomInput';
 import { SearchOutlined } from "@ant-design/icons";
@@ -18,16 +19,45 @@ import { useLocation } from 'react-router-dom';
 import IconContainer from './IconContainer';
 import { Col, Row } from 'antd';
 import Avather from '../Avather/Avather';
+import { getLocalStorage, setLocalStorage } from '../../utils/webStorage';
+import { ServerKeys } from '../../api/serverKeys';
+import { Constants } from '../../uiData/constantValues';
+import { useData } from '../../context/DataContext';
 
 const Navbar = () => {
   const { userData } = useAppSelector((state) => state.auth);
   const { pathname } = useLocation();
+  const { navigateToSpecificRoute } = useData();
 
   const [sideDrawer, setSideDrawer] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("")
 
   const handleDrawer = () => {
     setSideDrawer(!sideDrawer);
   };
+
+  const handleSearchChange = async (value: string) => {
+    setSearchQuery(value);
+  }
+
+  const handleFilterContent = async () => {
+    const preFilterContent: any = getLocalStorage(ServerKeys.FILTER_DATA)
+    const parsedData: any = JSON.parse(preFilterContent)
+    if (searchQuery) {
+      if (parsedData?.length) {
+        // if we have max number of filter content then remove last element and push new query
+        if (parsedData?.length >= Constants.MAX_FILTER_LENGTH) {
+          parsedData.pop()
+          setLocalStorage(ServerKeys.FILTER_DATA, JSON.stringify([...parsedData, searchQuery.toLowerCase()]))
+        } else {
+          setLocalStorage(ServerKeys.FILTER_DATA, JSON.stringify([...parsedData, searchQuery.toLowerCase()]))
+        }
+      } else {
+        setLocalStorage(ServerKeys.FILTER_DATA, JSON.stringify([searchQuery.toLowerCase()]))
+      }
+    }
+    navigateToSpecificRoute(`${Paths.SEARCH}?id=${searchQuery}`);
+  }
 
   const allSideIcon = [
     generateSidPannelOption("home icon", Home, false, "home", HomeFill, pathname === Paths.HOME, Paths.HOME),
@@ -66,7 +96,9 @@ const Navbar = () => {
         <Col sm={24} md={12}>
           <CustomInput
             placeholder='Search'
+            onChange={(event) => handleSearchChange(event.target.value)}
             icon={<SearchOutlined />}
+            onClick={handleFilterContent}
           />
         </Col>
         <Col sm={24} md={6}>
