@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const generateSidPannelOption = (
   name: string,
-  icon: string,
+  icon: any,
   isPrivate: boolean,
   title: string,
-  iconSelected: string,
+  iconSelected: any,
   isSelected: boolean,
   path: string,
 ) => {

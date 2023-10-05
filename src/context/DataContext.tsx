@@ -41,7 +41,7 @@ export const useData = () => useContext(DataContext);
 const DataContextProvider = (props: IDataContext) => {
   const { children } = props;
   const navigate = useNavigate();
-  const [dataState, dataDispatcher] = useReducer(dataReducer, dataInitialState);
+  const [_dataState, _dataDispatcher] = useReducer(dataReducer, dataInitialState);
   const { useBreakpoint } = Grid;
   const screens = useBreakpoint();
   const { xs, sm, md, lg } = screens as { [key: string]: boolean };
@@ -61,7 +61,7 @@ const DataContextProvider = (props: IDataContext) => {
     md,
     lg,
     navigateToSpecificRoute,
-    navigateRouteWithState
+    navigateRouteWithState,
   }
   return <DataContext.Provider value={values}>{children}</DataContext.Provider>
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 // import { axiosGet } from '../utils/https.server'
 import VideoCard from '../components/VideoCard/VideoCard'
 

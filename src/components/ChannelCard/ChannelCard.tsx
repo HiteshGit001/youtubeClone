@@ -1,4 +1,3 @@
-import React from 'react'
 import { SearchedListSchema } from '../../api/dataSchemas'
 import { ServerKeys } from '../../api/serverKeys';
 import { truncate } from '../../helper/stringerFormatter';

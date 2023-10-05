@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Row } from 'antd'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import ReactPlayer from 'react-player'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import useAppSelector from '../hooks/useAppSelector'

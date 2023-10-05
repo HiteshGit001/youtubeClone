@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react'
 import cx from "classnames";
 import { VideoDetails } from '../../api/dataSchemas';
 import { truncate } from '../../helper/stringerFormatter';
 import { ServerKeys } from '../../api/serverKeys';
 import { viewCountFormatter } from '../../helper/numberFormatter';
 import { getDuration } from '../../helper/dateFormatter';
-import useAppSelector from '../../hooks/useAppSelector';
 import { useLocation } from 'react-router-dom';
 import { Paths } from '../../routes/pats';
 import { Col, Row } from 'antd';
@@ -20,9 +18,9 @@ interface IVideoCard {
 }
 const VideoCard = (props: IVideoCard) => {
   const { videoDetails, isVertical } = props;
-  const { contentDetails, snippet, statistics, id } = videoDetails;
+  const { snippet, statistics, id } = videoDetails;
 
-  const { sm, md, xs, navigateRouteWithState } = useData();
+  const { md, xs, navigateRouteWithState } = useData();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
 
