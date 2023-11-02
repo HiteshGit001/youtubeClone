@@ -1,6 +1,6 @@
 import { UserDataSchema } from "../../api/dataSchemas"
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../storage";
+// import { RootState } from "../storage";
 
 interface IAuthState {
   userData: UserDataSchema,
@@ -32,6 +32,6 @@ export const {
   updateUserData,
 } = authSlice.actions;
 
-export const authSelector = (state: RootState): object => state.auth;
+// export const authSelector = (state: RootState): object => state.auth;
 
 export default authSlice.reducer;

@@ -62,7 +62,8 @@ export type VideoDetails = {
   [ServerKeys.CONTENT_DETAILS]: ContentDetails,
   [ServerKeys.SNIPPET]: Snippet,
   [ServerKeys.STATISTICS]: Statistics,
-  [ServerKeys.ID]?: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [ServerKeys.ID]?: any,
 }
 
 export type ID = {

@@ -25,13 +25,13 @@ const VideoCard = (props: IVideoCard) => {
   const dispatch = useDispatch();
 
   const handleNavigate = (tag: string) => {
-    console.log(tag, "tag");
+    console.log(id, "tag");
     dispatch(updateRelatedKey(tag))
-    navigateRouteWithState(`${Paths.WATCH}?v=${id},${snippet?.[ServerKeys.CHANNEL_ID]}`, tag)
+    navigateRouteWithState(`${Paths.WATCH}?v=${id.videoId || id},${snippet?.[ServerKeys.CHANNEL_ID]}`, tag)
   }
 
   return (
-    <div onClick={isVertical ? () => handleNavigate(snippet?.[ServerKeys.TITLE]) : () => null} className={cx('pb_4', isVertical ? "" : md ? "flex g_4 align_start" : "")}>
+    <div onClick={() => handleNavigate(snippet?.[ServerKeys.TITLE])} className={cx('pb_4', isVertical ? "" : md ? "flex g_4 align_start" : "")}>
       {
         isVertical
           ? <img className={cx('h_100 br_2', isVertical ? "w_100" : "")} src={snippet?.[ServerKeys.THUMBNAILS]?.[ServerKeys.MAXRES]?.url ||
