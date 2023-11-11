@@ -15,3 +15,15 @@ export const viewCountFormatter = (number: number) => {
     return (number / 1_000_000_000_000).toFixed(1) + "T";
   }
 }
+
+export const formatSubscriberCount = (subscriberCount:number) => {
+  if (subscriberCount >= 10000000) { // 10 million or more
+    return (subscriberCount / 10000000)?.toFixed(2) + ' Cr';
+  } else if (subscriberCount >= 1000000) { // 1 million or more
+    return (subscriberCount / 1000000)?.toFixed(2) + ' M';
+  } else if (subscriberCount >= 1000) { // 1 thousand or more
+    return (subscriberCount / 1000)?.toFixed(2) + ' K';
+  } else {
+    return subscriberCount?.toString();
+  }
+}

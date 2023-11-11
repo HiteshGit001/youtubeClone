@@ -39,4 +39,5 @@ export enum ServerKeys {
   ID = "id",
   KIND = "kind",
   VIDEO_ID = 'videoId',
+  SUBSCRIBER_COUNT = "subscriberCount",
 }

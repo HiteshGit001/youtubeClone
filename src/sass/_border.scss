@@ -17,7 +17,7 @@
 }
 
 .br_4 {
-  border-radius: 1rem;
+  border-radius: 1rem !important;
 }
 
 // BORDERS
@@ -27,4 +27,10 @@
 
 .b_r_1_grey {
   border-right: 1px solid $grey;
+}
+
+// thumbnail
+.chanel_img {
+  border-radius: 5rem;
+  width: 60px;
 }

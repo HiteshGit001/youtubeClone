@@ -18,3 +18,11 @@ export const axiosPost = (url: string, body: any, authKeyExists: boolean, conten
   };
   return axios.post(url, body, { headers })
 }
+
+export const axiosDelete = (url: string, authKeyExists: boolean, contentType = ContentType.JSON) => {
+  const headers = {
+    'Content-Type': contentType,
+    ...(authKeyExists) && { Authorization: getSessionStorage(ServerKeys.LOGGER_ID) },
+  };
+  return axios.delete(url, { headers })
+}

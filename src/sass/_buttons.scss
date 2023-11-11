@@ -30,10 +30,20 @@
   @include font($font-primary, 0.75rem, 0.75rem, 600, $white);
 }
 
+.btn_lightgray {
+  @include btn(min-content, 0.25rem 1rem, $lightGray, 1px solid $grey !important, 0.4rem);
+  @include font($font-primary, 0.75rem, 0.75rem, 600, black !important);
+}
+
 // hover
 .btn_primary:hover {
   color: $white !important;
   background-color: $primary !important;
+}
+
+.btn_lightgray:hover{
+  color:$white !important;
+  background-color: $grey !important;
 }
 
 .btn_secondary:hover {
