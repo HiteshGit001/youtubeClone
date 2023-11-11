@@ -121,7 +121,6 @@ const Watch = () => {
       const response = await axiosDelete(`${UPDATE_LIKE_VIDEO_URL}${"ZSq7BhR4IJhN8746dbgOR6gTfKt2"}/${videoId}/${true}`, true);
       if (response?.status === HttpStatusCode.Ok) {
         setIsLiked(undefined);
-        console.log(response, "update")
       }
     } catch (error) {
       console.log(error)
