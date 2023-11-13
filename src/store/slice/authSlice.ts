@@ -1,7 +1,7 @@
 import { UserDataSchema } from "../../api/dataSchemas"
 import { createSlice } from "@reduxjs/toolkit";
-import { axiosPost } from "../../utils/https.server";
-import { LOGIN_URL } from "../../api/api";
+import { axiosGet, axiosPost } from "../../utils/https.server";
+import { GET_USER_DATA_URL, LOGIN_URL } from "../../api/api";
 import { HttpStatusCode } from "axios";
 import { setLocalStorage } from "../../utils/webStorage";
 import { Paths } from "../../routes/pats";
@@ -40,6 +40,17 @@ export const login = async (email: string, password: string, dispatch: any, navi
     dispatch(updateUserData(loginRes?.data))
     success("success", successMsg, 20)
     navigateToSpecificRoute(Paths.HOME)
+  }
+}
+
+export const getUserData = async (loggerID: string, dispatch: any) => {
+  try {
+    const response = await axiosGet(`${GET_USER_DATA_URL}/${loggerID}`, true);
+    if (response.status === HttpStatusCode.Ok) {
+      dispatch(updateUserData(response?.data))
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 

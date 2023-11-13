@@ -17,6 +17,7 @@ import Dislike from "../assets/icons/icons/Dislike.svg"
 import Like from "../assets/icons/icons/Like.svg"
 import DislikeFill from "../assets/icons/selectedIcons/DislikeFill.svg"
 import LikeFill from "../assets/icons/selectedIcons/LikeFill.svg"
+import { getLocalStorage } from '../utils/webStorage'
 
 
 const Watch = () => {
@@ -33,6 +34,8 @@ const Watch = () => {
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false)
   const [isLiked, setIsLiked] = useState<boolean>();
 
+  const loggerID = getLocalStorage("loggerId") || "";
+
   const channelDetails: any = selectedChannelList?.[0];
 
   const handleInfiniteScroll = async () => {
@@ -48,7 +51,7 @@ const Watch = () => {
 
   const handleSubscribe = async () => {
     try {
-      const response = await axiosPost(SUBSCRIBE_URL, { loggerId: "ZSq7BhR4IJhN8746dbgOR6gTfKt2", channelId: channelDetails?.id, channelDpUrl: channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.[ServerKeys.URL], email: "test@123" }, true)
+      const response = await axiosPost(SUBSCRIBE_URL, { loggerId: loggerID, channelId: channelDetails?.id, channelDpUrl: channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.[ServerKeys.URL], email: "test@123" }, true)
       if (response.status === HttpStatusCode.Ok) {
         setIsSubscribed(true)
       }
@@ -59,7 +62,7 @@ const Watch = () => {
 
   const handleUnsubscribe = async () => {
     try {
-      const response = await axiosDelete(`${UNSUBSCRIBE_URL}/${channelId}/${"ZSq7BhR4IJhN8746dbgOR6gTfKt2"}`, true)
+      const response = await axiosDelete(`${UNSUBSCRIBE_URL}/${channelId}/${loggerID}`, true)
       if (response.status === HttpStatusCode.Ok) {
         setIsSubscribed(false)
       }
@@ -71,7 +74,7 @@ const Watch = () => {
 
   const checkIsSubscribed = async () => {
     try {
-      const response = await axiosGet(`${FIND_ONE_SUBSCRIBE_URL}/${channelId}/${"ZSq7BhR4IJhN8746dbgOR6gTfKt2"}`, true)
+      const response = await axiosGet(`${FIND_ONE_SUBSCRIBE_URL}/${channelId}/${loggerID}`, true)
       if (response.status === HttpStatusCode.Ok) {
         if (response?.data?.channelId) {
           setIsSubscribed(true)
@@ -84,7 +87,7 @@ const Watch = () => {
 
   const checkIsLiked = async () => {
     try {
-      const response = await axiosGet(`${GET_ONE_LIKED_VIDEO_URL}/${videoId}/${"ZSq7BhR4IJhN8746dbgOR6gTfKt2"}`, true);
+      const response = await axiosGet(`${GET_ONE_LIKED_VIDEO_URL}/${videoId}/${loggerID}`, true);
       if (response?.data?.videoId) {
         setIsLiked(response?.data?.isLiked);
       }
@@ -96,7 +99,7 @@ const Watch = () => {
   const handleLike = async (isLiked: boolean) => {
     try {
       const body = {
-        loggerId: "ZSq7BhR4IJhN8746dbgOR6gTfKt2",
+        loggerId: loggerID,
         channelId,
         videoId,
         isLiked,
@@ -117,7 +120,7 @@ const Watch = () => {
 
   const handleUpdateLike = async () => {
     try {
-      const response = await axiosDelete(`${UPDATE_LIKE_VIDEO_URL}${"ZSq7BhR4IJhN8746dbgOR6gTfKt2"}/${videoId}/${true}`, true);
+      const response = await axiosDelete(`${UPDATE_LIKE_VIDEO_URL}${loggerID}/${videoId}/${true}`, true);
       if (response?.status === HttpStatusCode.Ok) {
         setIsLiked(undefined);
       }
@@ -134,7 +137,7 @@ const Watch = () => {
   useEffect(() => {
     checkIsLiked();
     checkIsSubscribed();
-    // fetchAllSubscribe(dispatch, "ZSq7BhR4IJhN8746dbgOR6gTfKt2")
+    // fetchAllSubscribe(dispatch, loggerID)
     fetchSearchResults(dispatch, [], relatedKey);
     fetchSelectedChannel(dispatch, channelId);
   }, [])

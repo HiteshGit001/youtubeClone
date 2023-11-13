@@ -9,6 +9,7 @@ export const CHANNEL_URL = `${BASE_URL}/channels?part=snippet%2Cstatistics&key=$
 
 export const SIGN_UP_URL = `${BACK_BASE_URL}/sign-up`
 export const LOGIN_URL = `${BACK_BASE_URL}/login`
+export const GET_USER_DATA_URL =  `${BACK_BASE_URL}/get-user`
 
 export const LIKE_VIDEO_URL =  `${BACK_BASE_URL}/like-video`
 export const UPDATE_LIKE_VIDEO_URL = `${BACK_BASE_URL}/update-liked-video/`
