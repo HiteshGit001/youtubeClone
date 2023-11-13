@@ -11,7 +11,7 @@ const ErrorContainer: FC<IErrorContainer> = (props: IErrorContainer) => {
     <>
       {
         touched && error
-          ? <span className='fs_12 lh_12 font_primary fw_400 error_red'>{error}</span>
+          ? <span className='fs_12 ta_left lh_md font_primary fw_400 danger'>{error}</span>
           : ''
       }
     </>

@@ -8,10 +8,16 @@ import Navbar from './components/Navbar/Navbar';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { useData } from './context/DataContext';
 
 function App() {
+  const {
+    contextHolder
+  } = useData()
+
   return (
     <div className='bg_primary'>
+      {contextHolder}
       <Navbar />
       <Suspense fallback="...Loading">
         <Routes>

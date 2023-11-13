@@ -12,7 +12,6 @@ import { formatSubscriberCount } from '../helper/numberFormatter'
 import CustomButton from '../components/custom/CustomButton'
 import { axiosDelete, axiosGet, axiosPost } from '../utils/https.server'
 import { FIND_ONE_SUBSCRIBE_URL, GET_ONE_LIKED_VIDEO_URL, LIKE_VIDEO_URL, SUBSCRIBE_URL, UNSUBSCRIBE_URL, UPDATE_LIKE_VIDEO_URL } from '../api/api'
-import { fetchAllSubscribe } from '../store/slice/likeSubscribeSlice'
 import { HttpStatusCode } from 'axios'
 import Dislike from "../assets/icons/icons/Dislike.svg"
 import Like from "../assets/icons/icons/Like.svg"

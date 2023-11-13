@@ -10,12 +10,7 @@ import DataContextProvider from './context/DataContext.tsx';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
-      <DataContextProvider
-        xs={false}
-        sm={false}
-        md={false}
-        lg={false}
-      >
+      <DataContextProvider>
         <Provider store={store}>
           <App />
         </Provider>

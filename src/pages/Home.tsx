@@ -12,6 +12,8 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const { videoList, nextVideosToke } = useAppSelector((state) => state.videoDetails)
+  const { userData } = useAppSelector((state) => state.auth)
+  console.log(userData, "user data")
   useEffect(() => {
     if (!videoList?.length) {
       fetchVideos(dispatch, []);

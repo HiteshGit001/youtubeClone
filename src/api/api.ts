@@ -7,6 +7,9 @@ export const VIDEO_URL = `${BASE_URL}/videos?part=snippet%2CcontentDetails%2Csta
 export const SEARCH_URL = `${BASE_URL}/search?part=snippet&maxResults=25&key=${YOUTUBE_KEY}`
 export const CHANNEL_URL = `${BASE_URL}/channels?part=snippet%2Cstatistics&key=${YOUTUBE_KEY}`
 
+export const SIGN_UP_URL = `${BACK_BASE_URL}/sign-up`
+export const LOGIN_URL = `${BACK_BASE_URL}/login`
+
 export const LIKE_VIDEO_URL =  `${BACK_BASE_URL}/like-video`
 export const UPDATE_LIKE_VIDEO_URL = `${BACK_BASE_URL}/update-liked-video/`
 export const GET_ONE_LIKED_VIDEO_URL = `${BACK_BASE_URL}/get-one-liked-video`
