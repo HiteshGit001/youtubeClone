@@ -39,11 +39,15 @@ const SignupForm = () => {
         .required('Confirm Password is required'),
     }),
     onSubmit: async (values): Promise<any> => {
-      const { firstName, lastName, email, password } = values;
-      const signupBody = { firstName, lastName, email, password }
-      const response = await axiosPost(SIGN_UP_URL, signupBody, true);
-      if (response.status === HttpStatusCode.Ok) {
-        login(email, password, dispatch, navigateToSpecificRoute, success, "Signed up succesfully");
+      try {
+        const { firstName, lastName, email, password } = values;
+        const signupBody = { firstName, lastName, email, password }
+        const response = await axiosPost(SIGN_UP_URL, signupBody, true);
+        if (response.status === HttpStatusCode.Ok) {
+          login(email, password, dispatch, navigateToSpecificRoute, success, "Signed up succesfully");
+        }
+      } catch (error) {
+        success("error", "Something went wrong", 10)
       }
     },
   })
