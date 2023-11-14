@@ -55,6 +55,7 @@ const SignupForm = () => {
 
   return (
     <form onSubmit={signUpFormik.handleSubmit}>
+      <input type="hidden" name="form-name" value="contact" />
       <div className='ta_center'>
         <h2 className="fs_banner_larg">SIGN UP</h2>
         <p className="my_4 fs_sm">We are glad you want to join</p>
