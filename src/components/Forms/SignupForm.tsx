@@ -47,6 +47,7 @@ const SignupForm = () => {
           login(email, password, dispatch, navigateToSpecificRoute, success, "Signed up succesfully");
         }
       } catch (error) {
+        console.log("some ierjwkj")
         success("error", "Something went wrong", 10)
       }
     },
