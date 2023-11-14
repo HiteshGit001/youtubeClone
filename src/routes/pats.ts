@@ -6,4 +6,5 @@ export enum Paths {
   SHORTS = "/shorts",
   SEARCH = "/search",
   WATCH = "/watch",
+  LIKED_VIDEOS = "/liked-videos",
 }

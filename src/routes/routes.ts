@@ -7,6 +7,7 @@ const SignUp = lazy(() => import("../pages/Signup"));
 const Search = lazy(() => import("../pages/Search"));
 const Watch = lazy(() => import("../pages/Watch"));
 const Subscribe = lazy(() => import("../pages/Subscribe"));
+const LikedVideos = lazy(() => import("../pages/LikedVideos"));
 
 const routeObjectGenerator = (element: FC, path: string, name: string, isPrivate: boolean) => {
   return {
@@ -25,4 +26,5 @@ export const routes = [
   routeObjectGenerator(Subscribe, Paths.SUBSCRIPTION, "SIGNUP", true),
   routeObjectGenerator(Search, Paths.SEARCH, "SEARCH", true),
   routeObjectGenerator(Watch, Paths.WATCH, "WATCH", true),
+  routeObjectGenerator(LikedVideos, Paths.LIKED_VIDEOS, "LIKED", true)
 ]

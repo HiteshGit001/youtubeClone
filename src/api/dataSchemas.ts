@@ -64,6 +64,8 @@ export type VideoDetails = {
   [ServerKeys.STATISTICS]: Statistics,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [ServerKeys.ID]?: any,
+  [ServerKeys.THUMBNAIL_URL]?: string,
+  [ServerKeys.VIDEO_ID]?: string,
 }
 
 export type ID = {

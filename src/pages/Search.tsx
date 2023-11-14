@@ -35,14 +35,14 @@ const Search = () => {
 
   useEffect(() => {
     fetchSearchResults(dispatch, [], searchId)
-  }, [])
+  }, [searchId])
 
   return (
     <Row className='pr_4'>
       {
-        searchedList?.map((ele) => {
+        searchedList?.map((ele, index) => {
           return (
-            <Col sm={24} md={24}>
+            <Col key={index} sm={24} md={24}>
               {
                 ele?.id?.videoId
                   ? <VideoCard

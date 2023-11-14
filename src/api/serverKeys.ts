@@ -40,4 +40,6 @@ export enum ServerKeys {
   KIND = "kind",
   VIDEO_ID = 'videoId',
   SUBSCRIBER_COUNT = "subscriberCount",
+  THUMBNAIL_URL = "thumbnailUrl",
+  CHANNEL_DETAILS = "channelDetails"
 }

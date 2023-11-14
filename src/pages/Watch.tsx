@@ -23,12 +23,12 @@ import { getLocalStorage } from '../utils/webStorage'
 const Watch = () => {
   const [queryParams] = useSearchParams();
   const { state } = useLocation();
-  console.log(state, "state");
   const videoId: any = queryParams.get("v");
   const channelId: any = videoId.split(",")?.[1]
 
   const { searchedList, nextSearchToken, selectedChannelList } = useAppSelector((state) => state.search);
   const { relatedKey } = useAppSelector((state) => state.videoDetails)
+  const { userData } = useAppSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false)
@@ -51,7 +51,7 @@ const Watch = () => {
 
   const handleSubscribe = async () => {
     try {
-      const response = await axiosPost(SUBSCRIBE_URL, { loggerId: loggerID, channelId: channelDetails?.id, channelDpUrl: channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.[ServerKeys.URL], email: "test@123" }, true)
+      const response = await axiosPost(SUBSCRIBE_URL, { channelDetails, channelName: channelDetails?.snippet?.title, loggerId: loggerID, channelId: channelDetails?.id, channelDpUrl: channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.[ServerKeys.URL], email: userData?.email }, true)
       if (response.status === HttpStatusCode.Ok) {
         setIsSubscribed(true)
       }
@@ -103,7 +103,7 @@ const Watch = () => {
         channelId,
         videoId,
         isLiked,
-        thumbnailUrl: channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.[ServerKeys.URL],
+        thumbnailUrl: state,
         snippet: channelDetails?.[ServerKeys.SNIPPET]
       }
       const response = await axiosPost(`${LIKE_VIDEO_URL}`, body, true);
@@ -145,7 +145,7 @@ const Watch = () => {
   return (
     // <>
     <Row>
-      <Col sm={24} md={15}>
+      <Col sm={24} md={17}>
         <ReactPlayer controls playing loop width="100%" url={`https://www.youtube.com/watch?v=${videoId}`} />
         <Row className='py_4 g_4'>
           <Col className='flex align_start g_4'>
@@ -168,7 +168,7 @@ const Watch = () => {
           </Col>
         </Row>
       </Col>
-      <Col className='px_2' sm={24} md={9}>
+      <Col className='px_2' sm={24} md={7}>
         {
           searchedList?.map((ele) => {
             return (

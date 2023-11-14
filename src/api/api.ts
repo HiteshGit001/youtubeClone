@@ -14,6 +14,7 @@ export const GET_USER_DATA_URL =  `${BACK_BASE_URL}/get-user`
 export const LIKE_VIDEO_URL =  `${BACK_BASE_URL}/like-video`
 export const UPDATE_LIKE_VIDEO_URL = `${BACK_BASE_URL}/update-liked-video/`
 export const GET_ONE_LIKED_VIDEO_URL = `${BACK_BASE_URL}/get-one-liked-video`
+export const GET_ALL_LIKED_VIDEOS_URL = `${BACK_BASE_URL}/all-liked-video`
 
 export const UNSUBSCRIBE_URL = `${BACK_BASE_URL}/unsubscribe`
 export const FIND_ONE_SUBSCRIBE_URL = `${BACK_BASE_URL}/find-one-subscribe`
