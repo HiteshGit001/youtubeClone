@@ -1,5 +1,5 @@
 import { Avatar } from 'antd'
-import useAppSelector from '../../hooks/useAppSelector'
+import useAppSelector from '../../hooks/useAppSelector';
 
 const Avather = () => {
   const { userData } = useAppSelector((state) => state.auth);
