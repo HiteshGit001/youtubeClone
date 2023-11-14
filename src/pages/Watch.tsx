@@ -18,6 +18,7 @@ import Like from "../assets/icons/icons/Like.svg"
 import DislikeFill from "../assets/icons/selectedIcons/DislikeFill.svg"
 import LikeFill from "../assets/icons/selectedIcons/LikeFill.svg"
 import { getLocalStorage } from '../utils/webStorage'
+import { useData } from '../context/DataContext'
 
 
 const Watch = () => {
@@ -29,6 +30,7 @@ const Watch = () => {
   const { searchedList, nextSearchToken, selectedChannelList } = useAppSelector((state) => state.search);
   const { relatedKey } = useAppSelector((state) => state.videoDetails)
   const { userData } = useAppSelector((state) => state.auth);
+  const { success } = useData()
   const dispatch = useDispatch();
 
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false)
@@ -46,6 +48,7 @@ const Watch = () => {
       }
     } catch (error) {
       console.log(error);
+      success("error", "Something went wrong", 10)
     }
   }
 
@@ -57,6 +60,7 @@ const Watch = () => {
       }
     } catch (error) {
       console.log(error)
+      success("error", "Something went wrong", 10)
     }
   }
 
@@ -69,6 +73,7 @@ const Watch = () => {
       console.log(response, "uns")
     } catch (error) {
       console.log(error)
+      success("error", "Something went wrong", 10)
     }
   }
 
@@ -82,6 +87,7 @@ const Watch = () => {
       }
     } catch (err) {
       console.log(err)
+      success("error", "Something went wrong", 10)
     }
   }
 
@@ -93,6 +99,7 @@ const Watch = () => {
       }
     } catch (error) {
       console.log(error)
+      success("error", "Something went wrong", 10)
     }
   }
 
@@ -115,6 +122,7 @@ const Watch = () => {
       console.log(response)
     } catch (error) {
       console.log(error)
+      success("error", "Something went wrong", 10)
     }
   }
 
@@ -126,6 +134,7 @@ const Watch = () => {
       }
     } catch (error) {
       console.log(error)
+      success("error", "Something went wrong", 10)
     }
   }
 

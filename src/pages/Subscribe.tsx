@@ -12,7 +12,7 @@ import { truncate } from '../helper/stringerFormatter'
 
 const Subscribe = () => {
   const { userData } = useAppSelector((state) => state.auth);
-  const { navigateToSpecificRoute } = useData()
+  const { navigateToSpecificRoute, success } = useData()
   const [allSub, setAllSub] = useState([]);
 
   const fetchAllSubscribe = async () => {
@@ -23,6 +23,7 @@ const Subscribe = () => {
       }
     } catch (error) {
       console.log(error)
+      success("error", "Something went wrong", 10)
     }
   }
 

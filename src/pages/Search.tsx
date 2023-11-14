@@ -7,9 +7,11 @@ import { fetchSearchResults } from '../store/slice/searchSlice';
 import { useSearchParams } from 'react-router-dom';
 import { ServerKeys } from '../api/serverKeys';
 import ChannelCard from '../components/ChannelCard/ChannelCard';
+import { useData } from '../context/DataContext';
 
 const Search = () => {
   const { searchedList, nextSearchToken } = useAppSelector((state) => state.search);
+  const { success } = useData()
 
   const [queryParams] = useSearchParams();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,6 +27,7 @@ const Search = () => {
       }
     } catch (error) {
       console.log(error);
+      success("error", "Something went wrong", 10)
     }
   }
 

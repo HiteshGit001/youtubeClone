@@ -1,14 +1,16 @@
 import { ReactNode } from 'react'
 import SidePannel from '../components/SidePannel/SidePannel';
+import { useData } from '../context/DataContext';
 
 interface IAuthLayout {
   child: ReactNode;
 }
 const AuthLayout = (props: IAuthLayout) => {
   const { child } = props;
+  const { sm } = useData()
   return (
     <>
-      <SidePannel />
+      {!sm ? <div></div> : <SidePannel />}
       {child}
     </>
   )

@@ -34,12 +34,16 @@ export const authSlice = createSlice({
 })
 
 export const login = async (email: string, password: string, dispatch: any, navigateToSpecificRoute: any, success: any, successMsg: string) => {
-  const loginRes = await axiosPost(LOGIN_URL, { email, password }, true)
-  if (loginRes.status === HttpStatusCode.Ok) {
-    setLocalStorage("loggerId", loginRes?.data?.loggerId)
-    dispatch(updateUserData(loginRes?.data))
-    success("success", successMsg, 20)
-    navigateToSpecificRoute(Paths.HOME)
+  try {
+    const loginRes = await axiosPost(LOGIN_URL, { email, password }, true)
+    if (loginRes.status === HttpStatusCode.Ok) {
+      setLocalStorage("loggerId", loginRes?.data?.loggerId)
+      dispatch(updateUserData(loginRes?.data))
+      success("success", successMsg, 20)
+      navigateToSpecificRoute(Paths.HOME)
+    }
+  } catch (error) {
+    success("error", "Something went wrong", 10)
   }
 }
 
