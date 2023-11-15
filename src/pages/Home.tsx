@@ -58,7 +58,7 @@ const Home = () => {
           })
         }
         {
-          isLoading ? [...Array(6)].map((ele, index) => {
+          isLoading ? [...Array(6)].map((_ele, index) => {
             return (
               <Col key={index} sm={12} md={8}>
                 <SkeletonLoader />
