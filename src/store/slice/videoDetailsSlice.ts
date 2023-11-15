@@ -50,13 +50,14 @@ export const videoDetailsSlice = createSlice({
   }
 });
 
-export const fetchVideos = async (dispatch: AppDispatch, videoList: VideoDetails[], nextPageToken = "",) => {
+export const fetchVideos = async (dispatch: AppDispatch, videoList: VideoDetails[], setIsLoading: any, nextPageToken = "") => {
   try {
     const response = await axiosGet(
       `${MOST_POPULAR_URL}&pageToken=${nextPageToken}&regionCode=IN&key=${YOUTUBE_KEY}`,
       true
     )
     if (response.status === HttpStatusCode.Ok) {
+      setIsLoading(false);
       dispatch(updateVideoList([...videoList, ...response.data.items]));
       console.log(response?.data?.nextPageToken, "resp next p");
       dispatch(updateNextVideosToke(response?.data?.nextPageToken));

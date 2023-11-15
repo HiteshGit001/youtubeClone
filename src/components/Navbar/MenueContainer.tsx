@@ -7,12 +7,10 @@ interface IMenueContainer {
 const MenueContainer = (props: IMenueContainer) => {
   const { onClick, isIcon = true } = props
   return (
-    <>
-      <div className='flex g_4'>
-        {isIcon ? <MenuOutlined onClick={onClick} /> : <></>}
-        <p>Hi tube</p>
-      </div>
-    </>
+    <div className='flex g_4'>
+      {isIcon ? <MenuOutlined className="white" onClick={onClick} /> : <></>}
+      <p>Hi tube</p>
+    </div>
   )
 }
 
