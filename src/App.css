@@ -5,6 +5,10 @@
   font-family: "Mulish", sans-serif;
 }
 
+body {
+  background-color: rgba(24, 24, 24, 1);
+}
+
 p,
 h1,
 h2,

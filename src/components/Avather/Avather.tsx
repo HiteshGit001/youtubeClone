@@ -28,7 +28,8 @@ const Avather = () => {
       generateMenuItem("signOut", <p className='black' onClick={() => handleSignOut()}>Sign out</p>)
     ].filter((ele) => userData?.loggerId ? ele.key === "signOut" : ele.key !== "signOut")
     setItems(menuItem)
-  }, [])
+    console.log(menuItem.filter((ele) => userData?.loggerId ? ele.key === "signOut" : ele.key !== "signOut"), 'Loooog')
+  }, [userData])
   return (
     <div className='pointer br_5 b_2_white'>
       <Dropdown className='' menu={{ items }}>

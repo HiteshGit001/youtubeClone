@@ -61,7 +61,7 @@ const LikedVideos = () => {
             })
           }
         </Row>
-        : <p className='ta_center w_100 fs_md h_100vh'>You have not liked video yet...</p>
+        : <p className='ta_center w_100 fs_md'>You have not liked video yet...</p>
       }
     </>
   )

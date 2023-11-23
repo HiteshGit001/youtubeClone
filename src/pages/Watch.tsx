@@ -174,21 +174,21 @@ const Watch = () => {
       <Col sm={24} md={16}>
         <ReactPlayer controls playing loop width="100%" url={`https://www.youtube.com/watch?v=${videoId}`} />
         <Row className='py_4 g_1'>
-          <Col md={2} className='flex align_start'>
+          <Col className='flex align_start'>
             <img className='chanel_img' src={channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.[ServerKeys.URL]} />
           </Col>
-          <Col md={4} xs={12}>
+          <Col>
             <p>{channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.TITLE]}</p>
             <p>{`${formatSubscriberCount(channelDetails?.[ServerKeys.STATISTICS]?.[ServerKeys.SUBSCRIBER_COUNT])} subscribers`}</p>
           </Col>
-          <Col md={2} xs={12}>
+          <Col>
             {
               !isSubscribed
                 ? <CustomButton onClick={() => handleSubscribe()} className="btn_secondary br_4" label="Subscribe" />
                 : <CustomButton onClick={() => handleUnsubscribe()} className='btn_lightgray black br_4' label="Subscribed" />
             }
           </Col>
-          <Col md={3}>
+          <Col>
             <img className='pointer w_8' onClick={() => isLiked ? handleUpdateLike() : handleLike(true)} src={isLiked ? LikeFill : Like} alt="like" />
             <img className='pointer w_8' onClick={() => isLiked === false ? handleUpdateLike() : handleLike(false)} src={isLiked === false ? DislikeFill : Dislike} alt="dis like" />
           </Col>
