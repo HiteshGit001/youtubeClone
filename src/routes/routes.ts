@@ -8,6 +8,7 @@ const Search = lazy(() => import("../pages/Search"));
 const Watch = lazy(() => import("../pages/Watch"));
 const Subscribe = lazy(() => import("../pages/Subscribe"));
 const LikedVideos = lazy(() => import("../pages/LikedVideos"));
+const Shorts = lazy(() => import("../pages/Shorts"));
 
 const routeObjectGenerator = (element: FC, path: string, name: string, isPrivate: boolean) => {
   return {
@@ -22,7 +23,7 @@ export const routes = [
   routeObjectGenerator(Home, Paths.HOME, "HOME", true),
   routeObjectGenerator(Login, Paths.LOGIN, "LOGIN", false),
   routeObjectGenerator(SignUp, Paths.SIGN_UP, "SIGNUP", false),
-  routeObjectGenerator(SignUp, Paths.SHORTS, "SIGNUP", true),
+  routeObjectGenerator(Shorts, Paths.SHORTS, "SIGNUP", true),
   routeObjectGenerator(Subscribe, Paths.SUBSCRIPTION, "SIGNUP", true),
   routeObjectGenerator(Search, Paths.SEARCH, "SEARCH", true),
   routeObjectGenerator(Watch, Paths.WATCH, "WATCH", true),

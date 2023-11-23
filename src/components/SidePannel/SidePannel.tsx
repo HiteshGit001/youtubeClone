@@ -25,7 +25,7 @@ const SidePannel = () => {
     generateSidPannelOption("home icon", Home, false, "home", HomeFill, pathname === Paths.HOME, Paths.HOME),
     generateSidPannelOption("short icon", Short, false, "short", ShortFill, pathname === Paths.SHORTS, Paths.SHORTS),
     generateSidPannelOption("subscription icon", Subscriptions, userData.loggerId ? false : true, "subscription", SubscriptionsFill, pathname === Paths.SUBSCRIPTION, Paths.SUBSCRIPTION),
-    generateSidPannelOption("like icon", Like, false, "Like Dislike", LikeFill, pathname === Paths.LIKED_VIDEOS, Paths.LIKED_VIDEOS),
+    generateSidPannelOption("like icon", Like, userData.loggerId ? false : true, "Like Dislike", LikeFill, pathname === Paths.LIKED_VIDEOS, Paths.LIKED_VIDEOS),
   ];
 
   const handleNavigate = (path: string) => {

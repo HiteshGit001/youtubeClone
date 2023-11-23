@@ -1,4 +1,3 @@
-import { Col, Row } from 'antd'
 import CustomInput from '../custom/CustomInput'
 import CustomButton from '../custom/CustomButton'
 import { useFormik } from 'formik'
@@ -10,6 +9,7 @@ import { HttpStatusCode } from 'axios';
 import { useData } from '../../context/DataContext';
 import { login } from '../../store/slice/authSlice';
 import { useDispatch } from 'react-redux';
+import { Paths } from '../../routes/pats';
 
 interface ISignUp {
   firstName: string,
@@ -60,50 +60,49 @@ const SignupForm = () => {
         <h2 className="fs_banner_larg">SIGN UP</h2>
         <p className="my_4 fs_sm">We are glad you want to join</p>
       </div>
-      <Row className="justify_center">
-        <Col md={18}>
-          <div>
-            <CustomInput
-              onChange={signUpFormik.handleChange}
-              name="firstName"
-              value={signUpFormik.values.firstName}
-              error={signUpFormik.errors.firstName}
-              touched={signUpFormik.touched.firstName}
-              placeholder="First name" />
-            <CustomInput
-              onChange={signUpFormik.handleChange}
-              name="lastName"
-              value={signUpFormik.values.lastName}
-              error={signUpFormik.errors.lastName}
-              touched={signUpFormik.touched.lastName}
-              className="mt_4" placeholder="Last name" />
-            <CustomInput
-              onChange={signUpFormik.handleChange}
-              name="email"
-              value={signUpFormik.values.email}
-              error={signUpFormik.errors.email}
-              touched={signUpFormik.touched.email}
-              className="mt_4"
-              placeholder="User email"
-            />
-            <CustomInput
-              onChange={signUpFormik.handleChange}
-              name="password"
-              value={signUpFormik.values.password}
-              error={signUpFormik.errors.password}
-              touched={signUpFormik.touched.password}
-              className="mt_4" placeholder="Password" />
-            <CustomInput
-              onChange={signUpFormik.handleChange}
-              name="confirmPassword"
-              value={signUpFormik.values.confirmPassword}
-              error={signUpFormik.errors.confirmPassword}
-              touched={signUpFormik.touched.confirmPassword}
-              className="mt_4" placeholder="Confirm Password" />
-            <CustomButton htmlType='submit' className="mt_4 btn_secondary w_100 br_3 fs_sm" label="SIGN UP" />
-          </div>
-        </Col>
-      </Row>
+      <div>
+        <div>
+          <CustomInput
+            onChange={signUpFormik.handleChange}
+            name="firstName"
+            value={signUpFormik.values.firstName}
+            error={signUpFormik.errors.firstName}
+            touched={signUpFormik.touched.firstName}
+            placeholder="First name" />
+          <CustomInput
+            onChange={signUpFormik.handleChange}
+            name="lastName"
+            value={signUpFormik.values.lastName}
+            error={signUpFormik.errors.lastName}
+            touched={signUpFormik.touched.lastName}
+            className="mt_4" placeholder="Last name" />
+          <CustomInput
+            onChange={signUpFormik.handleChange}
+            name="email"
+            value={signUpFormik.values.email}
+            error={signUpFormik.errors.email}
+            touched={signUpFormik.touched.email}
+            className="mt_4"
+            placeholder="User email"
+          />
+          <CustomInput
+            onChange={signUpFormik.handleChange}
+            name="password"
+            value={signUpFormik.values.password}
+            error={signUpFormik.errors.password}
+            touched={signUpFormik.touched.password}
+            className="mt_4" placeholder="Password" />
+          <CustomInput
+            onChange={signUpFormik.handleChange}
+            name="confirmPassword"
+            value={signUpFormik.values.confirmPassword}
+            error={signUpFormik.errors.confirmPassword}
+            touched={signUpFormik.touched.confirmPassword}
+            className="mt_4" placeholder="Confirm Password" />
+          <CustomButton htmlType='submit' className="mt_4 btn_secondary w_100 br_3 fs_sm" label="SIGN UP" />
+        </div>
+      </div>
+      <p className='ta_center fs_md mt_4 mb_4'>If you alredy have account <span className='blue pointer td_underline' onClick={() => navigateToSpecificRoute(Paths.LOGIN)}>Login</span></p>
     </form>
   )
 }

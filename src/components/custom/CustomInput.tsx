@@ -84,7 +84,7 @@ const CustomInput: FC<ICustomInput> = (props) => {
 
   return (
     <>
-      <div className="flex">
+      <div className="custom_input_container flex align_center">
         <Input
           id={id}
           className={cx("custom_input", className)}
@@ -103,7 +103,7 @@ const CustomInput: FC<ICustomInput> = (props) => {
           placeholder={placeholder}
           onBlur={onBlur}
         />
-        {icon && <CustomButton onClick={onClick} className="bg_gray" icon={iconUi} />}
+        {icon && <CustomButton onClick={onClick} className="bg_gray btn flex align_center h_100" icon={iconUi} />}
       </div>
       <ErrorContainer
         touched={touched}

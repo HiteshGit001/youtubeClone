@@ -163,3 +163,13 @@
 .pointer {
   cursor: pointer;
 }
+
+.td_underline {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+  .fs_banner_larg {
+    font-size: 3rem;
+  }
+}

@@ -38,11 +38,11 @@ const VideoCard = (props: IVideoCard) => {
       className={cx('pb_4', isVertical ? "" : md ? "flex g_4 align_start" : "")}>
       {
         isVertical
-          ? <img className={cx('h_100 br_2', isVertical ? "w_100" : "")} src={videoDetails?.thumbnailUrl || snippet?.[ServerKeys.THUMBNAILS]?.[ServerKeys.MAXRES]?.url ||
+          ? <img className={cx('h_280px br_2', isVertical ? "w_100" : "")} src={videoDetails?.thumbnailUrl || snippet?.[ServerKeys.THUMBNAILS]?.[ServerKeys.MAXRES]?.url ||
             snippet?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.url} alt="" />
           : <Row>
             <Col md={8}>
-              <img className={cx('h_100 br_2', xs ? "w_100" : "")} src={snippet?.[ServerKeys.THUMBNAILS]?.[ServerKeys.MAXRES]?.url ||
+              <img className={cx('h_280px br_2', xs ? "w_100" : "")} src={snippet?.[ServerKeys.THUMBNAILS]?.[ServerKeys.MAXRES]?.url ||
                 snippet?.[ServerKeys.THUMBNAILS]?.[ServerKeys.MEDIUM]?.url} alt="" />
             </Col>
           </Row>

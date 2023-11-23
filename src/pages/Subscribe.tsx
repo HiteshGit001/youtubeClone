@@ -39,7 +39,8 @@ const Subscribe = () => {
 
   return (
     <Row className='g_4'>
-      {
+
+      {allSub.length ?
         allSub?.map((ele: any) => {
           return (
             <Tooltip placement='bottom' key={ele?.channelDpUrl} title={ele?.channelName}>
@@ -52,6 +53,7 @@ const Subscribe = () => {
             </Tooltip>
           )
         })
+        : <p className='ta_center w_100 fs_md h_100vh'>Not Subscribed to any channel yet...</p>
       }
     </Row>
   )

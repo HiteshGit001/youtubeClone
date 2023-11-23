@@ -19,6 +19,9 @@ import DislikeFill from "../assets/icons/selectedIcons/DislikeFill.svg"
 import LikeFill from "../assets/icons/selectedIcons/LikeFill.svg"
 import { getLocalStorage } from '../utils/webStorage'
 import { useData } from '../context/DataContext'
+import { Paths } from '../routes/pats'
+
+import cx from "classnames";
 
 
 const Watch = () => {
@@ -30,7 +33,7 @@ const Watch = () => {
   const { searchedList, nextSearchToken, selectedChannelList } = useAppSelector((state) => state.search);
   const { relatedKey } = useAppSelector((state) => state.videoDetails)
   const { userData } = useAppSelector((state) => state.auth);
-  const { success } = useData()
+  const { success, navigateToSpecificRoute } = useData()
   const dispatch = useDispatch();
 
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false)
@@ -53,14 +56,18 @@ const Watch = () => {
   }
 
   const handleSubscribe = async () => {
-    try {
-      const response = await axiosPost(SUBSCRIBE_URL, { channelDetails, channelName: channelDetails?.snippet?.title, loggerId: loggerID, channelId: channelDetails?.id, channelDpUrl: channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.[ServerKeys.URL], email: userData?.email }, true)
-      if (response.status === HttpStatusCode.Ok) {
-        setIsSubscribed(true)
+    if (loggerID) {
+      try {
+        const response = await axiosPost(SUBSCRIBE_URL, { channelDetails, channelName: channelDetails?.snippet?.title, loggerId: loggerID, channelId: channelDetails?.id, channelDpUrl: channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.[ServerKeys.URL], email: userData?.email }, true)
+        if (response.status === HttpStatusCode.Ok) {
+          setIsSubscribed(true)
+        }
+      } catch (error) {
+        console.log(error)
+        success("error", "Something went wrong", 10)
       }
-    } catch (error) {
-      console.log(error)
-      success("error", "Something went wrong", 10)
+    } else {
+      navigateToSpecificRoute(Paths.LOGIN)
     }
   }
 
@@ -104,37 +111,45 @@ const Watch = () => {
   }
 
   const handleLike = async (isLiked: boolean) => {
-    try {
-      const body = {
-        loggerId: loggerID,
-        channelId,
-        videoId,
-        isLiked,
-        thumbnailUrl: state,
-        snippet: channelDetails?.[ServerKeys.SNIPPET]
-      }
-      const response = await axiosPost(`${LIKE_VIDEO_URL}`, body, true);
-      if (response?.status === HttpStatusCode.Ok) {
-        if (response?.data?.videoId) {
-          setIsLiked(true);
+    if (loggerID) {
+      try {
+        const body = {
+          loggerId: loggerID,
+          channelId,
+          videoId,
+          isLiked,
+          thumbnailUrl: state,
+          snippet: channelDetails?.[ServerKeys.SNIPPET]
         }
+        const response = await axiosPost(`${LIKE_VIDEO_URL}`, body, true);
+        if (response?.status === HttpStatusCode.Ok) {
+          if (response?.data?.videoId) {
+            setIsLiked(true);
+          }
+        }
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+        success("error", "Something went wrong", 10)
       }
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-      success("error", "Something went wrong", 10)
+    } else {
+      navigateToSpecificRoute(Paths.LOGIN)
     }
   }
 
   const handleUpdateLike = async () => {
-    try {
-      const response = await axiosDelete(`${UPDATE_LIKE_VIDEO_URL}${loggerID}/${videoId}/${true}`, true);
-      if (response?.status === HttpStatusCode.Ok) {
-        setIsLiked(undefined);
+    if (loggerID) {
+      try {
+        const response = await axiosDelete(`${UPDATE_LIKE_VIDEO_URL}${loggerID}/${videoId}/${true}`, true);
+        if (response?.status === HttpStatusCode.Ok) {
+          setIsLiked(undefined);
+        }
+      } catch (error) {
+        console.log(error)
+        success("error", "Something went wrong", 10)
       }
-    } catch (error) {
-      console.log(error)
-      success("error", "Something went wrong", 10)
+    } else {
+      navigateToSpecificRoute(Paths.LOGIN)
     }
   }
 
@@ -144,8 +159,10 @@ const Watch = () => {
   }, [nextSearchToken])
 
   useEffect(() => {
-    checkIsLiked();
-    checkIsSubscribed();
+    if (loggerID) {
+      checkIsLiked();
+      checkIsSubscribed();
+    }
     // fetchAllSubscribe(dispatch, loggerID)
     fetchSearchResults(dispatch, [], relatedKey);
     fetchSelectedChannel(dispatch, channelId);
@@ -153,47 +170,50 @@ const Watch = () => {
 
   return (
     // <>
-    <Row>
-      <Col sm={24} md={17}>
+    <Row className={cx(channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.TITLE] ? "" : "h_100vh")}>
+      <Col sm={24} md={16}>
         <ReactPlayer controls playing loop width="100%" url={`https://www.youtube.com/watch?v=${videoId}`} />
-        <Row className='py_4 g_4'>
-          <Col className='flex align_start g_4'>
+        <Row className='py_4 g_1'>
+          <Col md={2} className='flex align_start'>
             <img className='chanel_img' src={channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.THUMBNAILS]?.[ServerKeys.DEFAULT]?.[ServerKeys.URL]} />
           </Col>
-          <Col>
+          <Col md={4} xs={12}>
             <p>{channelDetails?.[ServerKeys.SNIPPET]?.[ServerKeys.TITLE]}</p>
             <p>{`${formatSubscriberCount(channelDetails?.[ServerKeys.STATISTICS]?.[ServerKeys.SUBSCRIBER_COUNT])} subscribers`}</p>
           </Col>
-          <Col>
+          <Col md={2} xs={12}>
             {
               !isSubscribed
                 ? <CustomButton onClick={() => handleSubscribe()} className="btn_secondary br_4" label="Subscribe" />
                 : <CustomButton onClick={() => handleUnsubscribe()} className='btn_lightgray black br_4' label="Subscribed" />
             }
           </Col>
-          <Col>
-            <img className='pointer' onClick={() => isLiked ? handleUpdateLike() : handleLike(true)} src={isLiked ? LikeFill : Like} alt="like" />
-            <img className='pointer' onClick={() => isLiked === false ? handleUpdateLike() : handleLike(false)} src={isLiked === false ? DislikeFill : Dislike} alt="dis like" />
+          <Col md={3}>
+            <img className='pointer w_8' onClick={() => isLiked ? handleUpdateLike() : handleLike(true)} src={isLiked ? LikeFill : Like} alt="like" />
+            <img className='pointer w_8' onClick={() => isLiked === false ? handleUpdateLike() : handleLike(false)} src={isLiked === false ? DislikeFill : Dislike} alt="dis like" />
           </Col>
         </Row>
+        <p className='ta_center mb_4 w_100 fs_md'>Comments and replay comming soon in version 2...</p>
       </Col>
-      <Col className='px_2' sm={24} md={7}>
-        {
-          searchedList?.map((ele) => {
-            return (
-              <Col className='h_30' sm={24} md={24}>
-                {
-                  ele?.id?.videoId
-                    ? <VideoCard
-                      isVertical
-                      videoDetails={ele}
-                    />
-                    : <></>
-                }
-              </Col>
-            )
-          })
-        }
+      <Col className='px_2' sm={24} md={8}>
+        <div className='vertical_scroll_window h_90vh'>
+          {
+            searchedList?.map((ele) => {
+              return (
+                <Col className='h_30' sm={24} md={24}>
+                  {
+                    ele?.id?.videoId
+                      ? <VideoCard
+                        isVertical
+                        videoDetails={ele}
+                      />
+                      : <></>
+                  }
+                </Col>
+              )
+            })
+          }
+        </div>
       </Col>
     </Row>
     // </>

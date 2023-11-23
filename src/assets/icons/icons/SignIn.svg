@@ -1,0 +1,13 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="User_Add" clip-path="url(#clip0_102_1437)">
+<circle id="Ellipse 90" cx="26" cy="16" r="8" stroke="white" stroke-width="2"/>
+<path id="Ellipse 91" d="M42 40C42 35.7565 40.3143 31.6869 37.3137 28.6863C34.3131 25.6857 30.2435 24 26 24C21.7565 24 17.6869 25.6857 14.6863 28.6863C11.6857 31.6869 10 35.7565 10 40L26 40H42Z" stroke="white" stroke-width="2"/>
+<rect id="Rectangle 123" x="4" y="22" width="10" height="2" fill="white"/>
+<rect id="Rectangle 124" x="10" y="18" width="10" height="2" transform="rotate(90 10 18)" fill="white"/>
+</g>
+<defs>
+<clipPath id="clip0_102_1437">
+<rect width="48" height="48" fill="white"/>
+</clipPath>
+</defs>
+</svg>

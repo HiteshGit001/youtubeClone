@@ -9,10 +9,14 @@ import { generateSidPannelOption } from '../../uiData/sidePannelOption';
 import Home from "../../assets/icons/icons/Home.svg";
 import Short from "../../assets/icons/icons/Short.svg";
 import Subscriptions from "../../assets/icons/icons/Subscriptions.svg";
+import Like from "../../assets/icons/icons/Like.svg";
+import SignIn from "../../assets/icons/icons/SignIn.svg"
 
 import HomeFill from "../../assets/icons/selectedIcons/HomeFill.svg";
 import ShortFill from "../../assets/icons/selectedIcons/ShortFill.svg";
 import SubscriptionsFill from "../../assets/icons/selectedIcons/SubscriptionsFill.svg";
+import LikeFill from "../../assets/icons/selectedIcons/LikeFill.svg";
+
 import { Paths } from '../../routes/pats';
 import useAppSelector from '../../hooks/useAppSelector';
 import { useLocation } from 'react-router-dom';
@@ -61,8 +65,10 @@ const Navbar = () => {
 
   const allSideIcon = [
     generateSidPannelOption("home icon", Home, false, "home", HomeFill, pathname === Paths.HOME, Paths.HOME),
-    generateSidPannelOption("short icon", Short, false, "short", ShortFill, pathname === Paths.SHORTS, Paths.SHORTS),
+    generateSidPannelOption("login icon", Short, false, "short", ShortFill, pathname === Paths.SHORTS, Paths.SHORTS),
     generateSidPannelOption("subscription icon", Subscriptions, userData.loggerId ? false : true, "subscription", SubscriptionsFill, pathname === Paths.SUBSCRIPTION, Paths.SUBSCRIPTION),
+    generateSidPannelOption("like icon", Like, userData.loggerId ? false : true, "Like Dislike", LikeFill, pathname === Paths.LIKED_VIDEOS, Paths.LIKED_VIDEOS),
+    generateSidPannelOption("signin icon", SignIn, userData.loggerId ? true : false, "signin", SignIn, pathname === Paths.LOGIN, Paths.LOGIN),
   ]
 
   return (
@@ -89,11 +95,11 @@ const Navbar = () => {
           </>
         }
       />
-      <Row className='align_center'>
+      <Row gutter={22} className='align_center'>
         <Col sm={24} md={6}>
           <MenueContainer onClick={handleDrawer} />
         </Col>
-        <Col sm={24} md={12}>
+        <Col xs={20} md={12}>
           <CustomInput
             placeholder='Search'
             onChange={(event) => handleSearchChange(event.target.value)}
@@ -101,7 +107,7 @@ const Navbar = () => {
             onClick={handleFilterContent}
           />
         </Col>
-        <Col sm={24} md={6}>
+        <Col xs={4} md={6}>
           <div className='flex justify_end'>
             <Avather />
           </div>

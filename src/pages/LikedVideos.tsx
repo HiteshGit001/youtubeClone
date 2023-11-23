@@ -27,38 +27,43 @@ const LikedVideos = () => {
     fetchLikedVideos()
   }, [userData?.loggerId])
 
-  console.log(likedVideos?.filter((ele: any) => ele?.isLiked === isLiked),"lik")
+  console.log(likedVideos?.filter((ele: any) => ele?.isLiked === isLiked), "lik")
 
   return (
-    <Row gutter={22}>
-      <div className={cx('flex g_2 pb_2 w_100 align_center')}>
-        {
-          ["Liked", "Disliked"]?.map((ele: string) => {
-            return (
-              <div
-                onClick={() => setIsLiked(ele === "Liked")}
-                key={ele}
-                className={cx('w_max_content py_2 px_4 br_4 pointer tt_capitalize', ele === (isLiked ? "Liked" : "Disliked") ? "black" : "white", ele === (isLiked ? "Liked" : "Disliked") ? "bg_white primary" : "bg_gray")}
-              >
-                {ele}
-              </div>
-            )
-          })
-        }
-      </div>
-      {
-        likedVideos?.filter((ele: any) => ele?.isLiked === isLiked)?.map((ele: any, index: number) => {
-          return (
-            <Col key={ele?._id + index} sm={12} md={8}>
-              <VideoCard
-                isVertical
-                videoDetails={ele}
-              />
-            </Col>
-          )
-        })
+    <>
+      {likedVideos.length
+        ? <Row gutter={22}>
+          <div className={cx('flex g_2 pb_2 w_100 align_center')}>
+            {
+              ["Liked", "Disliked"]?.map((ele: string) => {
+                return (
+                  <div
+                    onClick={() => setIsLiked(ele === "Liked")}
+                    key={ele}
+                    className={cx('w_max_content py_2 px_4 br_4 pointer tt_capitalize', ele === (isLiked ? "Liked" : "Disliked") ? "black" : "white", ele === (isLiked ? "Liked" : "Disliked") ? "bg_white primary" : "bg_gray")}
+                  >
+                    {ele}
+                  </div>
+                )
+              })
+            }
+          </div>
+          {
+            likedVideos?.filter((ele: any) => ele?.isLiked === isLiked)?.map((ele: any, index: number) => {
+              return (
+                <Col key={ele?._id + index} sm={12} md={8}>
+                  <VideoCard
+                    isVertical
+                    videoDetails={ele}
+                  />
+                </Col>
+              )
+            })
+          }
+        </Row>
+        : <p className='ta_center w_100 fs_md h_100vh'>You have not liked video yet...</p>
       }
-    </Row>
+    </>
   )
 }
 
